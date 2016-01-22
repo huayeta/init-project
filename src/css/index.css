@@ -1,0 +1,68 @@
+@import "./color.css";
+
+.test{
+    background: black;
+}
+
+.autoprefixer{display: flex; background-color: rgba(255, 0, 0, 0.5);}
+
+.cssnext{background: color(red alpha(-10%))}
+
+$blue: blue;
+$column: 200px;
+
+@define-mixin icon $name,$color {
+    padding-left:16px;
+    &::after{
+        content:attr(title);
+    }
+    .button.$(color){
+        @mixin-content;
+    }
+}
+
+@define-extend bg-green {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+.search{
+    @mixin icon search,gary{
+        width: 3rem;
+    };
+    @extend bg-green;
+}
+
+.menu{
+    color: $blue;
+    background: color($blue blackness(20%));
+    width:calc(4 * $column);
+    a{
+        text-decoration: none;
+    }
+}
+$blue:red;
+.precss{
+    @if 3 < 5 {
+        color: $blue;
+        background: green;
+    }
+    @else {
+        background: red;
+    }
+}
+
+@for $i form 10 to 30 by 10 {
+    .icon-$i { width: $i%};
+}
+
+@each $i in (foo,bar,baz){
+    .icon-$(i) { background: url(icons/$(i).png)};
+}
+
+@define-mixin size $width,$height{
+    width: $width;
+    height: $height;
+}
+.size{
+    @mixin size 100px,10px
+}

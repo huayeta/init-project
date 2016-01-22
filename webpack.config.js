@@ -1,6 +1,8 @@
 'use strict';
 var path=require('path');
 var webpack=require('webpack');
+var autoprefixer=require('autoprefixer');
+var process=require('process');
 
 var JS_PATH=path.resolve(__dirname,'./src/js/');
 var bower_components=path.resolve(__dirname,'./bower_components');
@@ -48,7 +50,7 @@ module.exports={
     },
     output:{
         path:path.resolve(__dirname,'./js/'),
-        publicPath:'/lib/',
+        publicPath:'/dest/',
         chunkFilename:'[name].chunk.js',
         filename:'[name].js'
     },
