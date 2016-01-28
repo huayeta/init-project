@@ -1,12 +1,11 @@
 'use strict';
 var path=require('path');
 var webpack=require('webpack');
-var autoprefixer=require('autoprefixer');
-var process=require('process');
 
 var JS_PATH=path.resolve(__dirname,'./src/js/');
 var bower_components=path.resolve(__dirname,'./bower_components');
 var node_modules=path.resolve(__dirname,'./node_modules');
+var date=Date.now();
 
 var isProduction = function () {
   return process.env.NODE_ENV === 'production';
@@ -21,7 +20,10 @@ var plugins=[
     // }),
     new webpack.ResolverPlugin(
         new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
-    )
+    ),
+    new webpack.ProvidePlugin({
+       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
 ]
 if(isProduction()){
     plugins.push(
@@ -51,7 +53,7 @@ module.exports={
     output:{
         path:path.resolve(__dirname,'./js/'),
         publicPath:'/dest/',
-        chunkFilename:'[name].chunk.js',
+        chunkFilename:date+'[name].chunk.js',
         filename:'[name].js'
     },
     module:{
@@ -81,7 +83,10 @@ module.exports={
         ]
     },
     postcss:function(){
-        return [autoprefixer,precess];
+        return [
+            require('autoprefixer'),
+            require('precess')
+        ];
     },
     plugins:plugins,
     devtool : isProduction()?null:'source-map'

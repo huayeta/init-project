@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp webpack-w"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",
@@ -25,9 +27,12 @@
     "cssnano": "^3.4.0",
     "cssnext": "^1.8.4",
     "del": "^2.2.0",
+    "exports-loader": "^0.6.2",
     "file-loader": "^0.8.5",
     "gulp": "^3.9.0",
     "gulp-postcss": "^6.0.1",
+    "gulp-shell": "^0.5.2",
+    "imports-loader": "^0.6.5",
     "pixrem": "^3.0.0",
     "postcss": "^5.0.14",
     "postcss-color-rgba-fallback": "^2.2.0",

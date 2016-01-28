@@ -3,10 +3,17 @@ var webpack=require('webpack');
 var webpackStream=require('webpack-stream');
 var postcss=require('gulp-postcss');
 var del=require('del');
+var shell=require('gulp-shell');
 
-gulp.task('default',function(){
-    console.log(1);
-})
+gulp.task('default',['start'])
+
+gulp.task('start',shell.task([
+    'gulp webpack-w'
+]))
+
+gulp.task('publish',shell.task([
+    'NODE_ENV="production" gulp webpack'
+]))
 
 //清理项目文件
 gulp.task('clean',function(){
