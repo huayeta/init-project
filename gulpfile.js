@@ -4,6 +4,7 @@ var webpackStream=require('webpack-stream');
 var postcss=require('gulp-postcss');
 var del=require('del');
 var shell=require('gulp-shell');
+var gulpSequence=require('gulp-sequence');
 
 gulp.task('default',['start'])
 
@@ -11,17 +12,20 @@ gulp.task('start',shell.task([
     'gulp webpack-w'
 ]))
 
-gulp.task('publish',shell.task([
-    'NODE_ENV="production" gulp webpack'
-]))
+gulp.task('publish',['clean'],function(cb){
+    shell.task([
+        'NODE_ENV="production" gulp webpack'
+    ])(cb);
+})
 
 //清理项目文件
-gulp.task('clean',function(){
+gulp.task('clean',function(cb){
     var delPaths=[
         './dest/'
     ];
-    del(delPaths).then((paths) => {
-        console.log(paths+'\n');
+    del(delPaths).then((path) => {
+        console.log(path);
+        cb();
     })
 })
 

@@ -31,6 +31,7 @@
     "file-loader": "^0.8.5",
     "gulp": "^3.9.0",
     "gulp-postcss": "^6.0.1",
+    "gulp-sequence": "^0.4.4",
     "gulp-shell": "^0.5.2",
     "imports-loader": "^0.6.5",
     "pixrem": "^3.0.0",
