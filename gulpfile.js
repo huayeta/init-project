@@ -83,12 +83,14 @@ gulp.task('connect',function(cb){
 });
 // 自动刷新
 gulp.task('connect-reload',function(){
-    console.log(2);
     gulp.src('./*.htm')
         .pipe(connect.reload());
 })
-gulp.task('webpack-reload',gulpSequence('webpack','connect-reload'));
+gulp.task('webpack-connect-reload',['webpack'],function(){
+    gulp.src('./*.htm')
+        .pipe(connect.reload());
+});
 gulp.task('connect-w',function(cb){
     gulp.watch(['./*.htm'],['connect-reload']);
-    gulp.watch(baseWebpack,['webpack-reload'])
+    gulp.watch(baseWebpack,['webpack-connect-reload'])
 })
