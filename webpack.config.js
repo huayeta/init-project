@@ -48,7 +48,7 @@ module.exports={
         extensions:['','.js','.jsx','.es6']
     },
     entry:{
-        'index':'js/index.jsx',
+        'index':'js/app.jsx',
     },
     output:{
         path:path.resolve(__dirname,'./js/'),
@@ -65,7 +65,7 @@ module.exports={
                 exclude: /(node_modules|bower_components)/,
                 query:{
                     cacheDirectory:true,
-                    presets:['es2015','react','stage-2'],
+                    presets:['es2015','react','stage-3'],
                     "plugins": ["transform-runtime"]
                 }
             },

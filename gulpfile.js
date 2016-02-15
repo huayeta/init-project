@@ -5,12 +5,14 @@ var postcss=require('gulp-postcss');
 var del=require('del');
 var shell=require('gulp-shell');
 var gulpSequence=require('gulp-sequence');
+var connect=require('gulp-connect');
 
-gulp.task('default',['start'])
 
-gulp.task('start',shell.task([
-    'gulp webpack-w'
-]))
+gulp.task('default',['connect','connect-w'])
+
+// gulp.task('start',shell.task([
+//     'gulp webpack-w'
+// ]))
 
 gulp.task('publish',['clean'],function(cb){
     shell.task([
@@ -64,10 +66,29 @@ var baseWebpack=[
     './src/js/**/&.es6'
 ]
 gulp.task('webpack',function(){
-    gulp.src('./src/js/')
+    return gulp.src('./src/js/')
         .pipe(webpackStream(require('./webpack.config.js'),webpack))
         .pipe(gulp.dest('./dest/js'))
 })
-gulp.task('webpack-w',function(){
-    gulp.watch(baseWebpack,['webpack']);
+// gulp.task('webpack-w',function(){
+//     gulp.watch(baseWebpack,['webpack']);
+// })
+//本地服务器
+gulp.task('connect',function(cb){
+    connect.server({
+        root:'./',
+        port: 8888,
+        livereload:true
+    })
+});
+// 自动刷新
+gulp.task('connect-reload',function(){
+    console.log(2);
+    gulp.src('./*.htm')
+        .pipe(connect.reload());
+})
+gulp.task('webpack-reload',gulpSequence('webpack','connect-reload'));
+gulp.task('connect-w',function(cb){
+    gulp.watch(['./*.htm'],['connect-reload']);
+    gulp.watch(baseWebpack,['webpack-reload'])
 })
