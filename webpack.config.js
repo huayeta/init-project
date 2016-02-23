@@ -66,7 +66,7 @@ module.exports={
                 query:{
                     cacheDirectory:true,
                     presets:['es2015','react','stage-3'],
-                    "plugins": ["transform-runtime"]
+                    "plugins": ['transform-runtime','transform-object-assign','transform-decorators']
                 }
             },
             {

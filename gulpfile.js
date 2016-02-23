@@ -10,9 +10,9 @@ var connect=require('gulp-connect');
 
 gulp.task('default',['connect','connect-w'])
 
-// gulp.task('start',shell.task([
-//     'gulp webpack-w'
-// ]))
+gulp.task('start',shell.task([
+    'gulp webpack-w'
+]))
 
 gulp.task('publish',['clean'],function(cb){
     shell.task([
@@ -70,9 +70,9 @@ gulp.task('webpack',function(){
         .pipe(webpackStream(require('./webpack.config.js'),webpack))
         .pipe(gulp.dest('./dest/js'))
 })
-// gulp.task('webpack-w',function(){
-//     gulp.watch(baseWebpack,['webpack']);
-// })
+gulp.task('webpack-w',function(){
+    gulp.watch(baseWebpack,['webpack']);
+})
 //本地服务器
 gulp.task('connect',function(cb){
     connect.server({
@@ -83,11 +83,11 @@ gulp.task('connect',function(cb){
 });
 // 自动刷新
 gulp.task('connect-reload',function(){
-    gulp.src('./*.htm')
+    gulp.src('*.htm')
         .pipe(connect.reload());
 })
 gulp.task('webpack-connect-reload',['webpack'],function(){
-    gulp.src('./*.htm')
+    gulp.src('*.htm')
         .pipe(connect.reload());
 });
 gulp.task('connect-w',function(cb){
