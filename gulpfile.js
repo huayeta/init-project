@@ -53,11 +53,16 @@ gulp.task('postcss',function(){
         .pipe(postcss(processors))
         .pipe(gulp.dest('./dest/css'))
 })
-
 gulp.task('postcss-w',function(){
     gulp.watch(baseCss,['postcss']);
 })
-
+gulp.task('postcss-clean',function(cb){
+    del(['./dest/css/']).then((path) => {
+        console.log(path);
+        cb();
+    })
+})
+gulp.task('postcss-start',['postcss','postcss-w']);
 //webpack
 var baseWebpack=[
     './src/js/*.jsx',
@@ -73,6 +78,13 @@ gulp.task('webpack',function(){
 gulp.task('webpack-w',function(){
     gulp.watch(baseWebpack,['webpack']);
 })
+gulp.task('webpack-clean',function(cb){
+    del(['./dest/js/']).then((path) => {
+        console.log(path);
+        cb();
+    })
+})
+gulp.task('webpack-start',['webpack','webpack-w']);
 //本地服务器
 gulp.task('connect',function(cb){
     connect.server({
@@ -94,3 +106,4 @@ gulp.task('connect-w',function(cb){
     gulp.watch(['./*.htm'],['connect-reload']);
     gulp.watch(baseWebpack,['webpack-connect-reload'])
 })
+gulp.task('connect-start',['connect','connect-w']);

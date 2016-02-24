@@ -1,21 +1,25 @@
 {
   "name": "react",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "init-project",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp webpack-w"
+    "start": "gulp start"
   },
-  "author": "",
+  "author": "huayeta",
   "license": "ISC",
+  "repository":{
+      "type":"git",
+      "url":"https://github.com/huayeta/init-project"
+  },
   "dependencies": {
     "history": "^1.17.0",
-    "react": "^0.14.6",
-    "react-dom": "^0.14.6",
-    "react-redux": "^4.2.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
     "react-router": "^1.0.3",
-    "redux": "^3.2.0",
+    "redux": "^3.3.1",
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
