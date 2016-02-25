@@ -1,29 +1,19 @@
-var a1 = [1, 2, 3, 4];
-var a2 = a1.includes(1);
-function aa(...args){
-    let b={};
-    console.log(Object.assign(b,...args));
-}
-// aa({a:1});
+import React from 'react';
+import {render} from 'react-dom';
+import {Router,IndexRoute} from 'react-router';
 
-function mixins(...list){
-    return function(target){
-        Object.assign(target,...list);
-    }
-}
-
-const Foo={
-    fo(){
-        console.log('foo');
-    }
+const rootRoute={
+    component:'div',
+    childRoutes:[{
+        path:'/',
+        component:require('./components/App'),
+        childRoutes:[
+            require('./routes/test/')
+        ]
+    }],
 }
 
-@mixins(Foo)
-class myClass {
-    constructor() {
-
-    }
-}
-
-let obj=new myClass();
-console.log(obj.fo());
+render(
+    <Router children={rootRoute} ></Router>,
+    document.getElementById('app')
+)

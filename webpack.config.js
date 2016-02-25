@@ -48,11 +48,11 @@ module.exports={
         extensions:['','.js','.jsx','.es6']
     },
     entry:{
-        'index':'js/app.jsx',
+        'app':'js/app.jsx',
     },
     output:{
         path:path.resolve(__dirname,'./js/'),
-        publicPath:'/dest/',
+        publicPath:'/dest/js/',
         chunkFilename:date+'[name].chunk.js',
         filename:'[name].js'
     },
@@ -65,8 +65,8 @@ module.exports={
                 exclude: /(node_modules|bower_components)/,
                 query:{
                     cacheDirectory:true,
-                    presets:['es2015','react','stage-3'],
-                    "plugins": ['transform-runtime','transform-object-assign','transform-decorators']
+                    presets:['es2015','react','stage-2'],
+                    // plugins: ['transform-runtime']
                 }
             },
             {
