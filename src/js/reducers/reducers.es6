@@ -32,6 +32,9 @@ const todosReducer=(state=[],action)=>{
     }
 }
 
-const todoApp=combineReducers({filtersReducer,todosReducer});
+const todoApp=combineReducers({
+    filter:filtersReducer,
+    todos:todosReducer
+});
 
 module.exports=todoApp;
