@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Router,IndexRoute} from 'react-router';
+import {Router} from 'react-router';
 
 const rootRoute={
     component:'div',
@@ -14,6 +14,6 @@ const rootRoute={
 }
 
 render(
-    <Router children={rootRoute} ></Router>,
+    <Router children={rootRoute} />,
     document.getElementById('app')
 )

@@ -68,7 +68,7 @@ var baseWebpack=[
     './src/js/*.jsx',
     './src/js/*.es6',
     './src/js/**/*.jsx',
-    './src/js/**/&.es6'
+    './src/js/**/*.es6'
 ]
 gulp.task('webpack',function(){
     return gulp.src('./src/js/')

@@ -65,7 +65,7 @@ module.exports={
                 exclude: /(node_modules|bower_components)/,
                 query:{
                     cacheDirectory:true,
-                    presets:['es2015','react','stage-2'],
+                    presets:['es2015','react','stage-3'],
                     // plugins: ['transform-runtime']
                 }
             },
@@ -75,8 +75,7 @@ module.exports={
                 exclude: /(node_modules|bower_components)/,
                 query:{
                     cacheDirectory:true,
-                    presets:['es2015','stage-2'],
-                    "plugins": ["transform-runtime"]
+                    presets:['es2015','stage-3']
                 }
             },
             {test: /.(png|jpg)$/, loader: "url-loader?limit=10000"}
