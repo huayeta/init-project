@@ -11,7 +11,13 @@ export const Filters={
 
 // action 创建函数
 export const addTodo=(text)=>{
-    return {type:ADD_TODO,text}
+    // return {type:ADD_TODO,text}
+    return (dispatch,getState)=>{
+        setTimeout(()=>{
+            dispatch({type:ADD_TODO,text:'异步添加的东西'});
+        },1000)
+        dispatch({type:ADD_TODO,text});
+    }
 }
 export const updateTodo=(index,text)=>{
     return {type:UPDATE_TODO,index,text}

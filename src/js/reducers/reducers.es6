@@ -1,5 +1,5 @@
 import objectAssign from 'object-assign';
-import {Filters,ADD_TODO,UPDATE_TODO,UPDATE_FILTER} from '../actions/actions';
+import {Filters,ADD_TODO,UPDATE_TODO,UPDATE_FILTER,addTodo} from '../actions/actions';
 import {combineReducers} from 'redux';
 
 const filtersReducer=(state=Filters.SHOW_ALL,action)=>{
@@ -13,10 +13,9 @@ const filtersReducer=(state=Filters.SHOW_ALL,action)=>{
 }
 
 const todosReducer=(state=[],action)=>{
-    // console.log(action);
     switch (action.type) {
         case ADD_TODO:
-            return [...state,{text:action.text}]
+            return [...state,{text:action.text}];
             break;
         case UPDATE_TODO:
             return [

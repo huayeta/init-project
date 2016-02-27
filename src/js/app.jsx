@@ -2,10 +2,15 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Router} from 'react-router';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore,applyMiddleware} from 'redux';
 import todoApp from './reducers/reducers';
+import thunkMiddleware from 'redux-thunk';
+import logger from 'redux-logger';
 
-let store=createStore(todoApp);
+let store=createStore(
+    todoApp,
+    applyMiddleware(thunkMiddleware,logger())
+);
 
 const rootRoute={
     component:'div',
