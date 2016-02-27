@@ -11,6 +11,9 @@ let store=createStore(
     todoApp,
     applyMiddleware(thunkMiddleware,logger())
 );
+let unsubscribe = store.subscribe(() =>
+  console.log(store.getState())
+);
 
 const rootRoute={
     component:'div',

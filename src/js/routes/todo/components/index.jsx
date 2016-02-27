@@ -17,7 +17,7 @@ class TodoApp extends React.Component {
                         actions.addTodo(text)
                     }} />
                 <TodoList
-                    todos={todos} />
+                    todos={todos?todos:[]} />
             </div>
         )
     }
