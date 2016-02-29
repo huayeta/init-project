@@ -1,19 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Router} from 'react-router';
+import {Router,hashHistory} from 'react-router';
 import {Provider} from 'react-redux';
-import {createStore,applyMiddleware} from 'redux';
-import todoApp from './reducers/reducers';
-import thunkMiddleware from 'redux-thunk';
-import logger from 'redux-logger';
-
-let store=createStore(
-    todoApp,
-    applyMiddleware(thunkMiddleware,logger())
-);
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-);
+import {store} from './store/store';
 
 const rootRoute={
     component:'div',
@@ -28,7 +17,7 @@ const rootRoute={
 
 render(
     <Provider store={store}>
-        <Router children={rootRoute} />
+        <Router children={rootRoute} history={hashHistory} />
     </Provider>,
     document.getElementById('app')
 )

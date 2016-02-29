@@ -1,8 +1,9 @@
 import objectAssign from 'object-assign';
 import {Filters,ADD_TODO,UPDATE_TODO,UPDATE_FILTER,addTodo} from '../actions/actions';
 import {combineReducers} from 'redux';
+import store from '../store/store';
 
-const filtersReducer=(state=Filters.SHOW_ALL,action)=>{
+export const filtersReducer=(state=Filters.SHOW_ALL,action)=>{
     switch (action.type) {
         case UPDATE_FILTER:
             return action.filter
@@ -12,7 +13,7 @@ const filtersReducer=(state=Filters.SHOW_ALL,action)=>{
     }
 }
 
-const todosReducer=(state=[],action)=>{
+export const todosReducer=(state=[],action)=>{
     switch (action.type) {
         case ADD_TODO:
             return [...state,{text:action.text}];
@@ -31,10 +32,16 @@ const todosReducer=(state=[],action)=>{
     }
 }
 
-const todoApp=combineReducers({
+let objectReducers={
     filter:filtersReducer,
-    todos:todosReducer
-});
+}
 
+export const createReducer=(store,obj)=>{
+    // console.log(store.getState());
+    if(obj)objectAssign(objectReducers,obj);
+    store.replaceReducer(
+        combineReducers(objectReducers)
+    )
+}
 
-module.exports=todoApp;
+export const todoApp=combineReducers(objectReducers);
