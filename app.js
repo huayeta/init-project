@@ -1,23 +1,19 @@
 var http = require('http');
 var fs=require('fs');
 var koa = require('koa');
+var router=require('koa-router')();
 var serve = require('koa-static');
+var views=require('koa-views');
 var path=require('path');
-var thunkify=require('thunkify');
 var wechatCfgs=require('./configs/wechat.js');
-var fetch = require('node-fetch');
-// fetch('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='+wechatCfgs.appID+'&secret='+wechatCfgs.appsecret)
-//     .then(function(res){
-//         return res.json();
-//     }).then(function(res){
-//         console.log(res);
-//     })
 
 var app=koa();
 
 app.use(serve(path.resolve(__dirname,'./public/'),{
     maxage:0
 }))
+
+//微信认证
 app.use(function *(next){
     var query=this.request.query;
     if(query.signature){
@@ -29,14 +25,16 @@ app.use(function *(next){
     yield next;
 })
 
-app.use(function *(next){
-    // console.log(this.request.path);
-    if(this.request.path==='/index.htm'){
-        wechatCfgs.getToken();
-        return this.body=yield thunkify(fs.readFile)('./views/index.htm','utf8');
+//解析html
+app.use(views(__dirname+'/views'),{
+    map:{
+        html:'swig'
     }
-    yield next;
 })
+
+//路由
+require('./configs/routes')(router);
+app.use(router.routes());
 
 //404页面的中间件
 app.use(function *pageNotFound(next){
