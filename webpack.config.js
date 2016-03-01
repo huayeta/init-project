@@ -2,7 +2,7 @@
 var path=require('path');
 var webpack=require('webpack');
 
-var JS_PATH=path.resolve(__dirname,'./src/js/');
+var JS_PATH=path.resolve(__dirname,'./public/src/js/');
 var bower_components=path.resolve(__dirname,'./bower_components');
 var node_modules=path.resolve(__dirname,'./node_modules');
 var date=Date.now();
@@ -39,7 +39,7 @@ if(isProduction()){
 module.exports={
     resolve:{
         alias:{
-            'js':path.resolve(__dirname,'./src/js/')
+            'js':path.resolve(__dirname,'./public/src/js/')
         },
         root:[
             bower_components,

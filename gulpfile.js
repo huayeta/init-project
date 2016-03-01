@@ -23,7 +23,7 @@ gulp.task('publish',['clean'],function(cb){
 //清理项目文件
 gulp.task('clean',function(cb){
     var delPaths=[
-        './dest/'
+        './public/dest/'
     ];
     del(delPaths).then((path) => {
         console.log(path);
@@ -32,7 +32,7 @@ gulp.task('clean',function(cb){
 })
 
 //postcss
-var baseCss=['./src/css/*.css','./src/css/**/*.css'];
+var baseCss=['./public/src/css/*.css','./public/src/css/**/*.css'];
 gulp.task('postcss',function(){
     //插件
     var processors=[
@@ -51,13 +51,13 @@ gulp.task('postcss',function(){
     ];
     return gulp.src(baseCss)
         .pipe(postcss(processors))
-        .pipe(gulp.dest('./dest/css'))
+        .pipe(gulp.dest('./public/dest/css'))
 })
 gulp.task('postcss-w',function(){
     gulp.watch(baseCss,['postcss']);
 })
 gulp.task('postcss-clean',function(cb){
-    del(['./dest/css/']).then((path) => {
+    del(['./public/dest/css/']).then((path) => {
         console.log(path);
         cb();
     })
@@ -65,21 +65,21 @@ gulp.task('postcss-clean',function(cb){
 gulp.task('postcss-start',['postcss','postcss-w']);
 //webpack
 var baseWebpack=[
-    './src/js/*.jsx',
-    './src/js/*.es6',
-    './src/js/**/*.jsx',
-    './src/js/**/*.es6'
+    './public/src/js/*.jsx',
+    './public/src/js/*.es6',
+    './public/src/js/**/*.jsx',
+    './public/src/js/**/*.es6'
 ]
 gulp.task('webpack',function(){
-    return gulp.src('./src/js/')
+    return gulp.src('./public/src/js/')
         .pipe(webpackStream(require('./webpack.config.js'),webpack))
-        .pipe(gulp.dest('./dest/js'))
+        .pipe(gulp.dest('./public/dest/js'))
 })
 gulp.task('webpack-w',function(){
     gulp.watch(baseWebpack,['webpack']);
 })
 gulp.task('webpack-clean',function(cb){
-    del(['./dest/js/']).then((path) => {
+    del(['./public/dest/js/']).then((path) => {
         console.log(path);
         cb();
     })
