@@ -7,14 +7,12 @@ import {bindActionCreators} from 'redux';
 import {todosReducer,createReducer} from '../../../reducers/reducers';
 import {store} from '../../../store/store.es6';
 createReducer(store,{todos:todosReducer})
-// store.replaceReducer(createReducer({todos:todosReducer}))
 
 class TodoApp extends React.Component {
     constructor() {
         super();
     }
     render(){
-        console.log(this);
         const {todos,actions} =this.props;
         return(
             <div>

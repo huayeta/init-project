@@ -14,16 +14,19 @@
     "url": "https://github.com/huayeta/init-project"
   },
   "dependencies": {
+    "co-wechat": "0.0.4",
     "core-js": "^2.1.1",
+    "crypto-js": "^3.1.6",
     "deep-assign": "^2.0.0",
     "history": "^1.17.0",
+    "immutable": "^3.7.6",
+    "node-fetch": "^1.3.3",
     "object-assign": "^4.0.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
     "redux": "^3.3.1",
-    "redux-async-actions-reducers": "^0.1.1",
     "redux-logger": "^2.6.0",
     "redux-thunk": "^1.0.3",
     "whatwg-fetch": "^0.11.0"

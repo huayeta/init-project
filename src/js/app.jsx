@@ -10,7 +10,8 @@ const rootRoute={
         path:'/',
         component:require('./components/App'),
         childRoutes:[
-            require('./routes/todo/')
+            require('./routes/todo/'),
+            require('./routes/immutable/'),
         ]
     }],
 }
