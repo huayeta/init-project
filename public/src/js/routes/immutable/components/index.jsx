@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
+import 'babel-polyfill';
 
 function timeout(ms) {
   return new Promise((resolve) => {
@@ -13,6 +14,7 @@ async function asyncPrint(value, ms) {
 }
 //
 asyncPrint('hello world', 50);
+
 
 // let map1=Immutable.Map({a:1,b:2,c:3});
 // // console.log(map1.get('b'));

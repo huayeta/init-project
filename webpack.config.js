@@ -23,7 +23,8 @@ var plugins=[
     ),
     new webpack.ProvidePlugin({
        'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+   }),
+   new webpack.NoErrorsPlugin()
 ]
 if(isProduction()){
     plugins.push(
