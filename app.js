@@ -9,6 +9,7 @@ var wechatCfgs=require('./configs/wechat.js');
 
 var app=koa();
 
+//静态资源的设置
 app.use(serve(path.resolve(__dirname,'./public/'),{
     maxage:0
 }))
@@ -19,6 +20,9 @@ app.use(views(__dirname+'/views',{
         html:'swig'
     }
 }))
+
+//bable
+// require('babel-register')
 
 //路由
 require('./configs/routes')(router);

@@ -1,5 +1,4 @@
 import React from 'react';
-import 'babel-polyfill';
 import Immutable from 'immutable';
 
 function timeout(ms) {
