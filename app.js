@@ -13,6 +13,17 @@ app.use(serve(path.resolve(__dirname,'./public/'),{
     maxage:0
 }))
 
+//解析html
+app.use(views(__dirname+'/views',{
+    map:{
+        html:'swig'
+    }
+}))
+
+//路由
+require('./configs/routes')(router);
+app.use(router.routes());
+
 //微信认证
 app.use(function *(next){
     var query=this.request.query;
@@ -24,17 +35,6 @@ app.use(function *(next){
     }
     yield next;
 })
-
-//解析html
-app.use(views(__dirname+'/views'),{
-    map:{
-        html:'swig'
-    }
-})
-
-//路由
-require('./configs/routes')(router);
-app.use(router.routes());
 
 //404页面的中间件
 app.use(function *pageNotFound(next){

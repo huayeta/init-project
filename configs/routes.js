@@ -6,6 +6,6 @@ module.exports=function(router){
         this.body='1122';
     })
     router.get('/index',function *(next){
-        this.body=yield this.render('index');
+        yield this.render('index');
     })
 }
