@@ -1,0 +1,9 @@
+.routes{
+     margin-bottom: 10px;
+    a{
+        margin-right: 10px;
+        &.active{
+            color: red;
+        }
+    }
+}

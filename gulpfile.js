@@ -67,8 +67,10 @@ gulp.task('postcss-start',['postcss','postcss-w']);
 var baseWebpack=[
     './public/src/js/*.jsx',
     './public/src/js/*.es6',
+    './public/src/js/*.css',
     './public/src/js/**/*.jsx',
-    './public/src/js/**/*.es6'
+    './public/src/js/**/*.es6',
+    './public/src/js/**/*.css'
 ]
 gulp.task('webpack',function(){
     return gulp.src('./public/src/js/')

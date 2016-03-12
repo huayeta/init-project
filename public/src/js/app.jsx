@@ -9,6 +9,7 @@ const rootRoute={
     childRoutes:[{
         path:'/',
         component:require('./components/App'),
+        indexRoute:require('./routes/todo/'),
         childRoutes:[
             require('./routes/todo/'),
             require('./routes/immutable/'),

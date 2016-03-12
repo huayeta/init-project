@@ -13,6 +13,7 @@ class TodoApp extends React.Component {
         super();
     }
     render(){
+        console.log(this);
         const {todos,actions} =this.props;
         return(
             <div>
@@ -24,6 +25,9 @@ class TodoApp extends React.Component {
             </div>
         )
     }
+}
+TodoApp.propTypes={
+    router:React.PropTypes.object,
 }
 
 module.exports=connect((state)=>{
