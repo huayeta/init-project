@@ -2,6 +2,6 @@
 
 ngrok -config ngrok.cfg -subdomain huayeta 80
 
-sudo supervisor -w configs,app -i public,views  --harmony app
+sudo supervisor -w configs,app,app.js -i public,views  --harmony app
 
 gulp webpack-w
