@@ -2,33 +2,64 @@ var http = require('http');
 var fs=require('fs');
 var koa = require('koa');
 var router=require('koa-router')();
-var serve = require('koa-static');
-var views=require('koa-views');
 var path=require('path');
-var wechatCfgs=require('./configs/wechat.js');
 
 var app=koa();
 
+//错误信息的捕获
+app.use(function *(next){
+    try {
+        yield next;
+    } catch (err) {
+        this.status= err.status || 500;
+        this.type='html';
+        this.body='<p>Something <em>exploded</em>, please contact huayeta.</p>';
+        //发送错误信息
+        this.app.emit('error',err,this);
+    } finally {
+
+    }
+})
+app.on('error',function(err){
+    if (process.env.NODE_ENV != 'test') {
+        console.log('sent error %s to the cloud', err.message);
+        console.log(err);
+      }
+})
+
 //静态资源的设置
+var serve = require('koa-static');
 app.use(serve(path.resolve(__dirname,'./public/'),{
     maxage:0
 }))
 
 //解析html
+var views=require('koa-views');
 app.use(views(__dirname+'/views',{
     map:{
         html:'swig'
     }
 }))
 
-//bable
-// require('babel-register')
+//打印日志
+var logger=require('koa-logger');
+function ignpreAssets(mw){
+    return function *(next){
+        if(/(\.js|\.css|\.ico)$/.test(this.path)){
+            yield next;
+        }else{
+            yield mw.call(this,next);
+        }
+    }
+}
+app.use(ignpreAssets(logger()));
 
 //路由
 require('./configs/routes')(router);
 app.use(router.routes());
 
 //微信认证
+var wechatCfgs=require('./configs/wechat.js');
 app.use(function *(next){
     var query=this.request.query;
     if(query.signature){
