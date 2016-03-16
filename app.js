@@ -54,7 +54,7 @@ function ignpreAssets(mw){
 }
 app.use(ignpreAssets(logger()));
 
-//微信认证
+//微信
 app.use(require('./app/wechat/index.js')());
 
 //路由

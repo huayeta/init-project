@@ -12,6 +12,9 @@ module.exports=function(){
     router.get('/',function *(next){
         this.body='1122';
     })
+    router.post('/',function *(next){
+        return this.body='';
+    })
     router.get('/index',function *(next){
         // console.log(this.cookies.get('huayeta'));
         // this.cookies.set('huayeta',null);
@@ -35,6 +38,6 @@ module.exports=function(){
 
     //微信的router
     require('../app/wechat/routes.js')(router);
-    
+
     return router.routes();
 }

@@ -21,10 +21,4 @@ wechatCfgs.checkSignature=function(query){
     return tmpStr===signature;
 }
 
-// 获取access_token
-wechatCfgs.getToken=function(){
-    if(!wechatCfgs.access_token){
-        console.log(1);
-    }
-}
 module.exports=wechatCfgs;
