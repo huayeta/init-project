@@ -1,7 +1,6 @@
 var http = require('http');
 var fs=require('fs');
 var koa = require('koa');
-var router=require('koa-router')();
 var path=require('path');
 
 var app=koa();
@@ -13,7 +12,8 @@ app.use(function *(next){
     } catch (err) {
         this.status= err.status || 500;
         this.type='html';
-        this.body='<p>Something <em>exploded</em>, please contact huayeta.</p>';
+        // this.body='<p>Something <em>exploded</em>, please contact huayeta.</p>';
+        this.body=err.message;
         //发送错误信息
         this.app.emit('error',err,this);
     } finally {
@@ -22,7 +22,7 @@ app.use(function *(next){
 })
 app.on('error',function(err){
     if (process.env.NODE_ENV != 'test') {
-        console.log('sent error %s to the cloud', err.message);
+        // console.log('sent error %s to the cloud', err.message);
         console.log(err);
       }
 })
@@ -54,22 +54,11 @@ function ignpreAssets(mw){
 }
 app.use(ignpreAssets(logger()));
 
-//路由
-require('./configs/routes')(router);
-app.use(router.routes());
-
 //微信认证
-var wechatCfgs=require('./configs/wechat.js');
-app.use(function *(next){
-    var query=this.request.query;
-    if(query.signature){
-        var tx=wechatCfgs.checkSignature(this.request.query);
-        if(tx){
-            return this.body=query.echostr;
-        }
-    }
-    yield next;
-})
+app.use(require('./app/wechat/index.js')());
+
+//路由
+app.use(require('./configs/routes')());
 
 //404页面的中间件
 app.use(function *pageNotFound(next){
