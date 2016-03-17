@@ -6,11 +6,11 @@ var url=require('url');
 var util=require('util');
 var Router=require('koa-router');
 
-var connection=global.connection;
+var db=global.db;
 
 function query(sql){
     return new Promise(function(resolve,reject){
-        connection.query(sql,function(err,rows){
+        db.query(sql,function(err,rows){
             if(err)return reject(err);
             resolve(rows);
         });
