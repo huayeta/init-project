@@ -6,6 +6,17 @@ var url=require('url');
 var util=require('util');
 var Router=require('koa-router');
 
+var connection=global.connection;
+
+function query(sql){
+    return new Promise(function(resolve,reject){
+        connection.query(sql,function(err,rows){
+            if(err)return reject(err);
+            resolve(rows);
+        });
+    })
+}
+
 module.exports=function(){
     const router=new Router();
 
@@ -18,7 +29,13 @@ module.exports=function(){
     router.get('/index',function *(next){
         // console.log(this.cookies.get('huayeta'));
         // this.cookies.set('huayeta',null);
-        yield this.render('index');
+        this.body='index';
+        // yield this.render('index');
+    })
+    router.get('/mysql',function *(next){
+        var results=yield query('select * from `members`');
+        console.log(results);
+        this.body=results;
     })
     router.get('/gz',function *(){
         const gzip = zlib.createGzip();
@@ -37,7 +54,7 @@ module.exports=function(){
     })
 
     //微信的router
-    require('../app/wechat/routes.js')(router);
+    // require('../app/wechat/routes.js')(router);
 
     return router.routes();
 }
