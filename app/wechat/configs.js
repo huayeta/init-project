@@ -1,5 +1,4 @@
 var cryptoJs=require('crypto-js');
-var thunkify=require('thunkify');
 
 var wechatCfgs={
     Token:'huayeta',
