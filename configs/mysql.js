@@ -1,21 +1,21 @@
 var mysql=require('mysql');
 
-const handleError=(err)=>{
-    if(err){
-        //如果是连接断开，自动重新连接
-        if(err.code==='PROTOCOL_CONNECTION_LOST'){
-            //2秒后重新连接一次
-            console.log('进行锻炼重连：'+new Date());
-            setTimeout(function(){
-                global.db=connect();
-            },2000)
-        }else{
-            console.log(err.stack || err);
-        }
-        return;
-    }
-    console.log('连接成功');
-}
+// const handleError=(err)=>{
+//     if(err){
+//         //如果是连接断开，自动重新连接
+//         if(err.code==='PROTOCOL_CONNECTION_LOST'){
+//             //2秒后重新连接一次
+//             console.log('进行锻炼重连：'+new Date());
+//             setTimeout(function(){
+//                 global.db=connect();
+//             },2000)
+//         }else{
+//             console.log(err.stack || err);
+//         }
+//         return;
+//     }
+//     console.log('连接成功');
+// }
 
 // const connect=()=>{
 //     var db=mysql.createConnection({

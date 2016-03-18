@@ -17,6 +17,8 @@ module.exports=function(router){
         prefix:'wechat'
     });
 
+    wetchatRouter.post('/configs',require('./index.js')())
+
     wetchatRouter.get('/',function *(next){
         this.body='wetchat';
     })

@@ -34,7 +34,7 @@ module.exports=function(){
     })
     router.get('/mysql',function *(next){
         var results=yield query('select * from `members`');
-        console.log(results);
+        // console.log(results);
         this.body=results;
     })
     router.get('/gz',function *(){
@@ -54,7 +54,7 @@ module.exports=function(){
     })
 
     //微信的router
-    // require('../app/wechat/routes.js')(router);
+    require('../app/wechat/routes.js')(router);
 
     return router.routes();
 }

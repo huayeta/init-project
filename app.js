@@ -57,9 +57,6 @@ app.use(ignpreAssets(logger()));
 //数据库
 require('./configs/mysql.js');
 
-//微信
-// app.use(require('./app/wechat/index.js')());
-
 //路由
 app.use(require('./configs/routes')());
 
