@@ -24,6 +24,9 @@ var plugins=[
     new webpack.ProvidePlugin({
        'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
    }),
+   new webpack.DefinePlugin({
+        'process.env.NODE_ENV': (!isProduction()?'"development"':'"production"')
+    }),
    new webpack.NoErrorsPlugin()
 ]
 if(isProduction()){
@@ -55,7 +58,8 @@ var processors=[
 module.exports={
     resolve:{
         alias:{
-            'js':path.resolve(__dirname,'./public/src/js/')
+            'js':path.resolve(__dirname,'./public/src/js/'),
+            'css':path.join(__dirname,'./public/src/css/'),
         },
         root:[
             bower_components,

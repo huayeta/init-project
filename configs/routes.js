@@ -23,15 +23,7 @@ module.exports=function(){
     router.get('/',function *(next){
         this.body='1122';
     })
-    router.post('/',function *(next){
-        return this.body='';
-    })
-    router.get('/index',function *(next){
-        // console.log(this.cookies.get('huayeta'));
-        // this.cookies.set('huayeta',null);
-        this.body='index';
-        // yield this.render('index');
-    })
+
     router.get('/mysql',function *(next){
         var results=yield query('select * from `members`');
         // console.log(results);
@@ -52,6 +44,10 @@ module.exports=function(){
         // this.body=parseUrl;
         this.body=util.inspect(parseUrl);
     })
+
+    //后台程序
+    var memberRouter=require('../app/member/routers.js')();
+    router.use('/',memberRouter.routes(),memberRouter.allowedMethods());
 
     //微信的router
     require('../app/wechat/routes.js')(router);

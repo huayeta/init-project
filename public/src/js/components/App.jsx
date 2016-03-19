@@ -1,22 +1,22 @@
 import React from 'react';
-import {Link} from 'react-router';
-import './App.css';
 
 class App extends React.Component {
     constructor() {
         super();
     }
+    componentWillMount(){
+        this.context.router.replace('/login');
+    }
     render(){
         return (
             <div>
-                <div className="routes">
-                    <Link to='/todo' activeClassName="active" >todo</Link>
-                    <Link to={{pathname:'immutable',query:{id:1}}} activeClassName="active" >immutable</Link>
-                </div>
                 {this.props.children || 'app'}
             </div>
         )
     }
+}
+App.contextTypes={
+    router: React.PropTypes.object.isRequired
 }
 
 module.exports=App;

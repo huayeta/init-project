@@ -21,7 +21,7 @@ gulp.task('publish',['clean'],function(cb){
 })
 
 //清理项目文件
-gulp.task('clean',function(cb){
+gulp.task('clean',['clean'],function(cb){
     var delPaths=[
         './public/dest/'
     ];
@@ -68,6 +68,8 @@ var baseWebpack=[
     './public/src/js/*.jsx',
     './public/src/js/*.es6',
     './public/src/js/*.css',
+    './public/src/css/*.css',
+    './public/src/css/**/*.css',
     './public/src/js/**/*.jsx',
     './public/src/js/**/*.es6',
     './public/src/js/**/*.css'
