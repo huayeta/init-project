@@ -73,7 +73,7 @@ module.exports={
     output:{
         path:path.resolve(__dirname,'./js/'),
         publicPath:'/dest/js/',
-        chunkFilename:date+'[name].chunk.js',
+        chunkFilename:isProduction()?(date+'[name].chunk.js'):'[name].chunk.js',
         filename:'[name].js'
     },
     module:{
